@@ -1,4 +1,8 @@
-from gluon.contrib.markdown import WIKI
+import re
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters import HtmlFormatter
+
 def getCategories():
 	categories = db(db.category.id>0).select(orderby=db.category.title)
 	categoryList = ""
@@ -30,11 +34,6 @@ def getArchives():
 			addedToList.append(archive.dateline.strftime("%B %Y"))
 			archiveList += str(DIV(XML('<a href="'+URL(r=request, c="archive", f="view", args=archive.dateline.strftime("%Y/%m"))+'">'+archive.dateline.strftime("%B %Y")+'</a>')))
 	return archiveList
-
-import re
-from pygments import highlight
-from pygments.lexers import get_lexer_by_name
-from pygments.formatters import HtmlFormatter
 
 def fetch_codes(body):
 	for match in re.finditer(r'\[code(?:=([^]]*))?](.*?)\[/code]', body, re.DOTALL):
