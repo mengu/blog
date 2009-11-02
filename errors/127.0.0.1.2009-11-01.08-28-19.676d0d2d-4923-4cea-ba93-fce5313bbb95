@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/mengu/projects/web2py/applications/blog/models/post.py'
+p4
+sS'code'
+p5
+S'from gluon.contrib.markdown import WIKI\ndef getCategories():\n\tcategories = db(db.category.id>0).select(orderby=db.category.title)\n\tcategoryList = ""\n\tfor category in categories:\n\t\tcategoryList += str(DIV(XML(\'<a href="\'+URL(r=request, c="category", f="view", args=category.id)+\'">\'+category.title+\'</a> (\'+str(category.relations.count())+\')\')))\n\treturn categoryList\n\ndef getRecentPosts(limit):\n\tposts = db(db.post.id>0).select(orderby=~db.post.dateline, limitby=(0,limit))\n\trecentPosts = ""\n\tfor post in posts:\n\t\trecentPosts += str(DIV(XML(\'<a href="\'+URL(r=request, c="post", f="view", args=post.id)+\'">\'+post.title+\'</a>\')))\n\treturn recentPosts\n\t\ndef getRecentComments(limit):\n\tcomments = db(db.comment.id>0).select(orderby=~db.comment.dateline, limitby=(0, limit))\n\trecentComments = ""\n\tfor comment in comments:\n\t\trecentComments += str(DIV(XML(\'By \'+comment.author+\' on <a href="\'+URL(r=request, c="post", f="view", args=comment.post_id)+\'">\'+comment.post_id.title+\'</a>\')))\n\treturn recentComments\n\ndef getArchives():\n\tfrom datetime import datetime\n\tarchives = db(db.post.id>0).select(db.post.dateline.month(), db.post.dateline.year(), distinct=True)\n\tprint archives\n\tarchiveList = ""\n\tfor archive in archives:\n\t\tt = datetime(archive.dateline.year, archive.dateline.month, 1)\n\t\tprint t\n\t\tarchiveList += str(DIV(XML(\'<a href="\'+URL(r=request, c="archive", f="view", args=)+\'"></a>\')))\n\treturn archiveList\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/mengu/projects/web2py/gluon/restricted.py", line 182, in restricted\n    ccode = compile(code.replace(\'\\r\\n\', \'\\n\'), layer, \'exec\')\n  File "/home/mengu/projects/web2py/applications/blog/models/post.py", line 31\n    archiveList += str(DIV(XML(\'<a href="\'+URL(r=request, c="archive", f="view", args=)+\'"></a>\')))\n                                                                                      ^\nSyntaxError: invalid syntax\n'
+p8
+s.

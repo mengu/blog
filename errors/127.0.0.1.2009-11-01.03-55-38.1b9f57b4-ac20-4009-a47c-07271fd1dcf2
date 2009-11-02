@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/mengu/projects/web2py/applications/blog/views/post/new.html'
+p4
+sS'code'
+p5
+S"response.write('',escape=False)\nextend('layout.html')\nresponse.write('\\n',escape=False)"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/mengu/projects/web2py/gluon/restricted.py", line 184, in restricted\n    exec ccode in environment\n  File "/home/mengu/projects/web2py/applications/blog/views/post/new.html", line 2, in <module>\nNameError: name \'extend\' is not defined\n'
+p8
+s.

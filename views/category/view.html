@@ -1,0 +1,10 @@
+{{extend 'layout.html'}}
+<div id="posts">
+
+{{ for relation in category.relations.select(): }}
+    <div class="post_title"><a href="{{= URL(r=request, c="post", f="view", args=relation.post) }}">{{= relation.post.title }}</a></div>
+{{ pass }}
+
+</div>
+
+

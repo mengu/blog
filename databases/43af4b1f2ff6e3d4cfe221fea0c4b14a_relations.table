@@ -1,0 +1,14 @@
+(dp1
+S'category'
+p2
+S'INT, INDEX category__idx (category), FOREIGN KEY (category) REFERENCES category(id) ON DELETE CASCADE'
+p3
+sS'post'
+p4
+S'INT, INDEX post__idx (post), FOREIGN KEY (post) REFERENCES post(id) ON DELETE CASCADE'
+p5
+sS'id'
+p6
+S'INT AUTO_INCREMENT NOT NULL'
+p7
+s.

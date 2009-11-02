@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/mengu/projects/web2py/applications/blog/controllers/post.py'
+p4
+sS'code'
+p5
+S'# coding: utf8\n# try something like\npages = db(db.page.id > 0).select()\ndef index():\n    posts = db(db.post.id > 0).select()\n    return dict(posts=posts, pages=pages)\n    \ndef view():\n\t\tprint request.args(0)\n\t\tpost = db.post[request.args(0)]\n    return dict(post=post, pages=pages, selectedpage=0)\n    \ndef new():\n\tcategories = db(db.category.id > 0).select(orderby=db.category.title)\n\tcategorylist = str()\n\tj = 1\n\tfor i in range(len(categories)):\n\t\t\tcategorylist += str(INPUT(_type="checkbox", _name="categories", _value=categories[i].id))+categories[i].title+" "\n\t\t\tif j % 4 == 0: categorylist += "<br />"\n\t\t\tj = j + 1\n\treturn dict(categories=categorylist, pages=pages, selectedpage=1)\n\ndef create():\n\ttitle = request.vars.title\n\tbody = request.vars.body\n\tpost = db.post.insert(title=title, body=body)\n\tif post.id:\n\t\tfor category in request.vars.categories:\n\t\t\tdb.relations.insert(post=post.id, category=category)\n\tredirect(URL(r=request, f="view", args=post.id))\t\n\nresponse._vars=response._caller(view)\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/mengu/projects/web2py/gluon/restricted.py", line 182, in restricted\n    ccode = compile(code.replace(\'\\r\\n\', \'\\n\'), layer, \'exec\')\n  File "/home/mengu/projects/web2py/applications/blog/controllers/post.py", line 11\n    return dict(post=post, pages=pages, selectedpage=0)\n                                                      \n^\nIndentationError: unindent does not match any outer indentation level\n'
+p8
+s.

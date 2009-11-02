@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/mengu/projects/web2py/applications/blog/controllers/post.py'
+p4
+sS'code'
+p5
+S'# coding: utf8\n# try something like\npages = db(db.page.id > 0).select()\ndef index():\n    posts = db(db.post.id > 0).select()\n    return dict(posts=posts, pages=pages)\n    \ndef view():\n    post = db.post[request.args(0)]\n    return dict(post=post, pages=pages)\n    \ndef new():\n\tcategories = db(db.category.id > 0).select(orderby=db.category.title)\n\tcategorylist = str()\n\tfor i in range(len(categories)):\n\t\t\tcategorylist += str(INPUT(_type="checkbox", _name="categories[]", _value=categories[i].id)+categories[i].title)\n\treturn dict(categories=categorylist, pages=pages, selectedpage=1)\n\ndef create():\n\ttitle = request.vars.title\n\tbody = request.vars.body\n\tfor category in request.vars.category:\n\t\tprint category\n\treturn dict()\n\nresponse._vars=response._caller(new)\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/mengu/projects/web2py/gluon/restricted.py", line 184, in restricted\n    exec ccode in environment\n  File "/home/mengu/projects/web2py/applications/blog/controllers/post.py", line 26, in <module>\n  File "/home/mengu/projects/web2py/gluon/globals.py", line 103, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/mengu/projects/web2py/applications/blog/controllers/post.py", line 16, in new\n    categorylist += str(INPUT(_type="checkbox", _name="categories[]", _value=categories[i].id)+categories[i].title)\nTypeError: unsupported operand type(s) for +: \'INPUT\' and \'str\'\n'
+p8
+s.

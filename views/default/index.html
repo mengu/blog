@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+<div id="posts">
+
+{{ for post in posts: }}
+    <div class="post_title"><a href="{{= URL(r=request, c="post", f="view", args=post.id) }}">{{= post.title }}</a></div>
+    <div class="post_info">{{= post.dateline.strftime("%B %d, %Y") }}</div>  <div class="post_info" style="margin-left: 3px;">{{ if post.comment.count() > 0: }} <a href="/blog/post/view/{{=post.id}}#comments"))}}">{{= post.comment.count() }} Comments</a> {{ else: }}{{= post.comment.count() }} Comments{{ pass }}</div>
+    <div class="post_body">{{= XML(fetch_codes(post.body)) }}</div>
+    <div class="post_info">Posted under {{ c = 0 }} {{ for category in post.categories: }}<a href="/blog/category/view/{{=category}}">{{= post.categories[category] }}</a>{{ c = c + 1 }}{{ if c == len(post.categories): }}.{{else:}},{{pass}} {{ pass }}</div>
+{{ pass }}
+
+
+	{{ if totalpages > 1:}}
+	<div class="pages">
+	{{ for i in range(0, totalpages): }}
+		<div class="page {{ if request.vars.page == i+1: }}selected{{pass}}"><a href="/blog/?page={{=i+1}}">{{=i+1}}</a></div>
+	{{ pass }}
+	</div>
+	{{ pass }}
+
+</div>
+
+

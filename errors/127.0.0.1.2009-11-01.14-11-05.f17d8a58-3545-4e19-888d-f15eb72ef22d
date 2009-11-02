@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/mengu/projects/web2py/applications/blog/controllers/comment.py'
+p4
+sS'code'
+p5
+S'# coding: utf8\n# try something like\ndef create():\n    postid = request.vars.postid\n    name = auth.user.first_name+" "+auth.user_lastname if auth.user else request.vars.name\n    email = auth.user.email if auth.user else request.vars.email\n    comment = request.vars.comment\n    db.comment.insert(post_id=postid, name=name, email=email, comment=comment)\n    redirect(URL(r=request, c="post", f="view", args=postid))\n\nresponse._vars=response._caller(create)\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/mengu/projects/web2py/gluon/restricted.py", line 184, in restricted\n    exec ccode in environment\n  File "/home/mengu/projects/web2py/applications/blog/controllers/comment.py", line 11, in <module>\n  File "/home/mengu/projects/web2py/gluon/globals.py", line 103, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/mengu/projects/web2py/applications/blog/controllers/comment.py", line 5, in create\n    name = auth.user.first_name+" "+auth.user_lastname if auth.user else request.vars.name\nAttributeError: \'Auth\' object has no attribute \'user_lastname\'\n'
+p8
+s.

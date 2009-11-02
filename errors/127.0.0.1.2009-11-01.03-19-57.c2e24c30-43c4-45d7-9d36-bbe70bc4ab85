@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/mengu/projects/web2py/applications/blog/models/post.py'
+p4
+sS'code'
+p5
+S'def getRecentPosts(limit):\n\tposts = db.(db.post.id>0).select(orderby=~db.post.dateline, limitby=limit)\n\trecentPosts = ""\n\tfor post in posts:\n\t\trecentPosts += DIV(\'<a href="\'+URL(r=request, c="post", f="view", args=post.id)+\'">\'+post.title+\'</a>\')\n\treturn recentPosts\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/mengu/projects/web2py/gluon/restricted.py", line 182, in restricted\n    ccode = compile(code.replace(\'\\r\\n\', \'\\n\'), layer, \'exec\')\n  File "/home/mengu/projects/web2py/applications/blog/models/post.py", line 2\n    posts = db.(db.post.id>0).select(orderby=~db.post.dateline, limitby=limit)\n               ^\nSyntaxError: invalid syntax\n'
+p8
+s.

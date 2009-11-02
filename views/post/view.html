@@ -1,0 +1,50 @@
+{{extend 'layout.html'}}
+
+
+
+<div id="posts">
+	<div class="post_title">{{= post.title }}</div>
+	{{ if is_admin(): }}
+	[<a href="/blog/post/edit/{{=post.id}}">Edit Post</a>] | [<a href="/blog/post/delete/{{=post.id}}">Delete Post</a>] <br />
+	{{ pass }}
+	<p><div class="post_info">{{= post.dateline.strftime("%B %d, %Y")}}</div> <div class="post_info">{{ if post.comment.count() > 0: }} <a href="#comments"}}">{{= post.comment.count() }} Comments</a> {{ else: }}{{= post.comment.count() }} Comments{{ pass }}</div></p>
+	<div class="post_body"><p>{{= XML(fetch_codes(post.body)) }}</p></div>
+	<div class="post_info">Posted under {{ c = 0 }} {{ for category in post.categories: }}<a href="/blog/category/view/{{=category}}">{{= post.categories[category] }}</a>{{ c = c + 1 }}{{ if c == len(post.categories): }}.{{else:}},{{pass}} {{ pass }}</div>
+
+	<h2 id="comments">Comments</h2>
+	<div class="comments">
+	{{ if post.comment.count() > 0: }}
+		  {{ for comment in post.comment.select(): }}
+		      <div class="comment_author"><strong>{{= comment.name }}</strong> said: {{ if is_admin(): }}[<a href="/blog/comment/delete/{{= comment.id}}/?postid={{=post.id}}">x</a>]{{ pass }}</div>
+		      <div class="comment_body">{{= comment.comment }}</div>
+		  {{ pass }}
+	{{ else: }}
+		  <div class="info">No comments made for this post.</div>
+	{{ pass }}
+	</div>
+
+	<div class="commentform">
+	{{ if auth.user and auth.user.id: }}
+	{{= FORM(H2("Have Your Say"), 
+	INPUT(_type="hidden", _name="postid", _value=post.id),
+	DIV('Comment:'),
+	DIV(TEXTAREA(_name="comment")),
+	DIV(INPUT(_type="submit", _value="Post Comment"))
+	, _action=URL(r=request, c="comment", f="create")) 
+	}}
+	{{ else: }}
+	{{= FORM(H2("Have Your Say"), 
+	INPUT(_type="hidden", _name="postid", _value=post.id),
+	DIV('Name Surname:'),
+	DIV(INPUT(_name="name", requires=IS_NOT_EMPTY())),
+	DIV('E-Mail Address:'), 
+	DIV(INPUT(_name="email", requires=IS_NOT_EMPTY())),
+	DIV('Comment:'),
+	DIV(TEXTAREA(_name="comment")),
+	DIV(INPUT(_type="submit", _value="Post Comment"))
+	, _action=URL(r=request, c="comment", f="create")) 
+	}}
+	{{ pass }}
+	</div>
+
+</div>

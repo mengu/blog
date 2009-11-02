@@ -1,0 +1,15 @@
+{{ extend 'layout.html'}}
+
+<div id="posts">
+	
+	{{ if posts:}}
+	<ul>
+	{{ for post in posts: }}
+		<li><a href="{{= URL(r=request, c="post", f="view", args=post.id)}}">{{=post.title}}</a></li>
+	{{ pass }}
+	</ul>
+	{{ else: }}
+	<h2>No posts in this archive.</h2>
+	{{ pass }}
+	
+</div>

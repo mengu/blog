@@ -1,0 +1,18 @@
+(dp1
+S'body'
+p2
+S'LONGTEXT'
+p3
+sS'dateline'
+p4
+S'DATETIME'
+p5
+sS'id'
+p6
+S'INT AUTO_INCREMENT NOT NULL'
+p7
+sS'title'
+p8
+S'VARCHAR(512)'
+p9
+s.

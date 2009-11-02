@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/mengu/projects/web2py/applications/blog/models/comment.py'
+p4
+sS'code'
+p5
+S'# coding: utf8\n# try something like\nimport post\ndb=DAL("sqlite://blog.db")\ndb.define_table(\'comment\',\n    Field(\'post_id\', db.post),\n    Field(\'author\', \'string\'),\n    Field(\'comment\', \'text\'),\n)\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/mengu/projects/web2py/gluon/restricted.py", line 184, in restricted\n    exec ccode in environment\n  File "/home/mengu/projects/web2py/applications/blog/models/comment.py", line 3, in <module>\n    import post\nImportError: No module named post\n'
+p8
+s.

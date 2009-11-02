@@ -1,0 +1,26 @@
+(dp1
+S'comment'
+p2
+S'LONGTEXT'
+p3
+sS'name'
+p4
+S'VARCHAR(512)'
+p5
+sS'dateline'
+p6
+S'DATETIME'
+p7
+sS'email'
+p8
+S'VARCHAR(512)'
+p9
+sS'post_id'
+p10
+S'INT, INDEX post_id__idx (post_id), FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE'
+p11
+sS'id'
+p12
+S'INT AUTO_INCREMENT NOT NULL'
+p13
+s.

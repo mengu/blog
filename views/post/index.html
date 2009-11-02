@@ -1,0 +1,7 @@
+{{extend 'layout.html'}}
+<h1>Blog Posts</h1>
+
+{{ for post in posts: }}
+    <div id="post_title" style="font: 20px Sans-serif;"><a href="{{= URL(r=request, f="view", args=post.id) }}">{{= post.title }}</a></div>
+    <div id="post_body" style="font: 14px Verdana;">{{= XML(post.body) }}</div>
+{{ pass }}

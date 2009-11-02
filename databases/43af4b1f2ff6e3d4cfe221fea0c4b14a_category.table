@@ -1,0 +1,10 @@
+(dp1
+S'id'
+p2
+S'INT AUTO_INCREMENT NOT NULL'
+p3
+sS'title'
+p4
+S'VARCHAR(512)'
+p5
+s.

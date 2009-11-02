@@ -1,0 +1,18 @@
+{{ extend 'layout.html' }}
+
+<div class="newpost" style="padding-left: 150px;">
+
+{{= FORM(
+H1("Edit Post"),
+INPUT(_type="hidden", _name="postid", _value=post.id),
+DIV("Post Title"),
+INPUT(_name="title", _size="30", _value=post.title),
+DIV("Post Body:"),
+TEXTAREA(_name="body", _rows="20", _cols="60", value=post.body),
+DIV("Categories:"),
+DIV(XML(categories)),
+INPUT(_type="submit", value="Create New Post"),
+_action=URL(r=request, f="update")
+) }}
+
+</div>

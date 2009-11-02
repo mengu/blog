@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/mengu/projects/web2py/applications/blog/models/post.py'
+p4
+sS'code'
+p5
+S'from gluon.contrib.markdown import WIKI\ndef getCategories():\n\tcategories = db(db.category.id>0).select(orderby=db.category.title)\n\tcategoryList = ""\n\tfor category in categories:\n\t\tcategoryList += str(DIV(XML(\'<a href="\'+URL(r=request, c="category", f="view", args=category.id)+\'">\'+category.title+\'</a> (\'+str(category.relations.count())+\')\')))\n\treturn categoryList\n\ndef getRecentPosts(limit):\n\tposts = db(db.post.id>0).select(orderby=~db.post.dateline, limitby=(0,limit))\n\trecentPosts = ""\n\tfor post in posts:\n\t\trecentPosts += str(DIV(XML(\'<a href="\'+URL(r=request, c="post", f="view", args=post.id)+\'">\'+post.title+\'</a>\')))\n\treturn recentPosts\n\t\ndef getRecentComments(limit):\n\tcomments = db(db.comment.id>0).select(orderby=~db.comment.dateline, limitby=(0, limit))\n\trecentComments = ""\n\tfor comment in comments:\n\t\trecentComments += str(DIV(XML(\'By \'+comment.name+\' on <a href="\'+URL(r=request, c="post", f="view", args=comment.post_id)+\'">\'+comment.post_id.title+\'</a>\')))\n\treturn recentComments\n\ndef getArchives():\n\tfrom datetime import datetime\n\tarchives = db(db.post.id>0).select(db.post.dateline, distinct=True)\n\tarchiveList = ""\n\taddedToList = []\n\tfor archive in archives:\n\t\tif archive.dateline.strftime("%B %Y") not in addedToList:\n\t\t\taddedToList.append(archive.dateline.strftime("%B %Y"))\n\t\t\tarchiveList += str(DIV(XML(\'<a href="\'+URL(r=request, c="archive", f="view", args=archive.dateline.strftime("%Y/%m"))+\'">\'+archive.dateline.strftime("%B %Y")+\'</a>\')))\n\treturn archiveList\n\nimport re\nfrom pygments import highlight\nfrom pygments.lexers import get_lexer_by_name\nfrom pygments.formatters import HtmlFormatter\n\ndef fetch_codes(body):\n\tbbcodelist = [r\'\\[url(?:=([^]]*))?](.*?)\\[/url]\', r\'\\[code(?:=([^]]*))?](.*?)\\[/code]\']\n\tfor match in re.finditer(r\'\\[url(?:=([^]]*))?](.*?)\\[/url]\', body, re.DOTALL):\n\t\turl = match.group(1)\n\t\ttitle = match.group(2)\n\t\tnewlink = \'<a href="\'+url+\'">\'+title+\'</a>\'\n\t\tbody = body.replace(match.group(0), newlink)\n\tfor match in re.finditer(r\'\\[code(?:=([^]]*))?](.*?)\\[/code]\', body, re.DOTALL):\n\t\tlanguage = match.group(1)\n\t\tcode = match.group(2)\n\t\tlexer = get_lexer_by_name(language, stripall=True)\n\t\tformatter = HtmlFormatter(linenos=False, cssclass="source")\n\t\tresult = highlight(code, lexer, formatter)\n\t\tbody = body.replace(match.group(0), result)\n\treturn body\n\ndef is_admin():\n\tif auth.user:\n\t\tmemberships = db((db.auth_user.id == auth.user.id)&(db.auth_membership.user_id==auth.user.id))\n\t\tif memberships.auth_membership.group_id\n\telse:\n\t\treturn False\n\treturn False\n\n\t\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/mengu/projects/web2py/gluon/restricted.py", line 182, in restricted\n    ccode = compile(code.replace(\'\\r\\n\', \'\\n\'), layer, \'exec\')\n  File "/home/mengu/projects/web2py/applications/blog/models/post.py", line 58\n    if memberships.auth_membership.group_id\n                                          \n^\nSyntaxError: invalid syntax\n'
+p8
+s.

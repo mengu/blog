@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/home/mengu/projects/web2py/applications/blog/controllers/archive.py'
+p4
+sS'code'
+p5
+S'# coding: utf8\npages = db(db.page.id > 0).select()\ndef view():\n\tyear = request.args(0)\n\tmonth = request.args(1)\n\tquery = (db.post.dateline.year()==year)\n\tif year:\n\t\tquery += &(db.post.dateline.month()==year)\n\tposts = db(query).select(db.post.id, db.post.title)\n\treturn dict(posts=posts, pages=pages, selectedpage=0)\n\nresponse._vars=response._caller(view)\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/home/mengu/projects/web2py/gluon/restricted.py", line 182, in restricted\n    ccode = compile(code.replace(\'\\r\\n\', \'\\n\'), layer, \'exec\')\n  File "/home/mengu/projects/web2py/applications/blog/controllers/archive.py", line 8\n    query += &(db.post.dateline.month()==year)\n             ^\nSyntaxError: invalid syntax\n'
+p8
+s.
