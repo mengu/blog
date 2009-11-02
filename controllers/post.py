@@ -60,7 +60,7 @@ def update():
 	postcategories = [relation.category for relation in post.relations.select()]
 	db(db.post.id == post.id).update(title=title, body=body)
 	# update categories.
-	request.vars.categories = [request.vars.categories] if len(request.vars.categories) == 1 else request.vars.categories
+	request.vars.categories = [request.vars.categories] if type(request.vars.categories)__name__ == 'int' else request.vars.categories
 	i = 0
 	for pcategory in request.vars.categories:
 		request.vars.categories[i] = int(request.vars.categories[i])
