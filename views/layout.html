@@ -8,71 +8,69 @@
     {{include 'web2py_ajax.html'}}
   </head>
   <body>
-  	<div style="overflow: auto; width: 100%">
-			<div id="header" style="padding-left: 150px;">
-				<div style="padding-top: 20px;">
-					<div class="logo"><a href="/blog/"><span class="f">M</span>ENGU.</div><div class="logo"><span class="f">N</span>ET</div></a></div>
+			
+			<div id="header">
+					<div class="logo"><a href="/blog/"><span class="f">M</span>ENGU.<span class="f">N</span>ET</a></div>
 					<div class="description">mengu's personal blog on web programming.</div>
-				</div>
 			</div>
-			<div id="menu" style="padding-left: 150px;">
+			
+			<div id="menu">
 				<ul>
 					{{ for page in pages: }}
 					<li{{ if selectedpage and selectedpage == page.id: }} class="selected" {{ pass }}><a href="{{ if page.link: }} {{= page.link }} {{ else: }} {{= URL(request.application, c="page", f="view", args=page.id)}} {{ pass }}">{{= page.title }}</a></li>
 					{{ pass }}
 				</ul>
 			</div>
-			{{ include }}
-		</div>
-		
-		<div id="sidebar">
-			<div style="padding: 10px;">	
 			
-				<div class="desc">Navigation</div>
-				<div class="content">
-				{{ if is_admin(): }}
-				<div><a href="/blog/post/new">New Post</a></div>
-				{{ pass }}
-				<div><a href="/blog/default/user/register">Register</a></div>
-				<div><a href="/blog/default/user/login">Login</a></div>
+			<div id="wrapper">
+			
+				<div id="maincontent">
+				{{ include }}
+			
 				</div>
-				<div class="desc padding">Pages</div>
-				<div class="content">
-				{{ for page in pages: }}
-					<div><a href="{{ if page.link: }}{{= page.link }}{{else:}}{{= URL(request.application, c="page", f="view", args=page.id) }}{{pass}}">{{= page.title }}</a></div>
-				{{ pass }}
+			
+				<div id="sidebar">
+				<div style="padding: 10px;">
+					<div class="desc">Navigation</div>
+					<div class="content">
+						{{ if is_admin(): }}
+						<div><a href="/blog/post/new">New Post</a></div>
+						{{ pass }}
+						<div><a href="/blog/default/user/register">Register</a></div>
+						<div><a href="/blog/default/user/login">Login</a></div>
+					</div>
+					<div class="desc padding">Pages</div>
+					<div class="content">
+						{{ for page in pages: }}
+						<div><a href="{{ if page.link: }}{{= page.link }}{{else:}}{{= URL(request.application, c="page", f="view", args=page.id) }}{{pass}}">{{= page.title }}</a></div>
+						{{ pass }}
+					</div>
+					
+					<div class="desc padding">Recent Posts</div>
+					<div class="content">{{= XML(getRecentPosts(5)) }}</div>
+					
+					<div class="desc padding">Recent Comments</div>
+					<div class="content">{{= XML(getRecentComments(10)) }}</div>
+					
+					<div class="desc padding">Categories</div>
+					<div class="content">{{= XML(getCategories()) }}</div>
+					
+					<div class="desc padding">Archives</div>
+					<div class="content">	{{= XML(getArchives()) }}</div>
+					</div>			
 				</div>
 				
-				<div class="desc padding">Recent Posts</div>
-				<div class="content">
-					{{= XML(getRecentPosts(5)) }}
-				</div>
-				
-				<div class="desc padding">Recent Comments</div>
-				<div class="content">
-					{{= XML(getRecentComments(10)) }}
-				</div>
-				
-				<div class="desc padding">Categories</div>
-				<div class="content">
-					{{= XML(getCategories()) }}
-				</div>
-				
-				<div class="desc padding">Archives</div>
-				<div class="content">
-					{{= XML(getArchives()) }}
-				</div>
-				
-			</div>
+				<div style="clear: both;"></div>
+			
 		</div>
 		
-		</div>	
-				
-		<div id="footer" style="">
+		<div id="footer">
 			<div align="center">
 				Powered by <a href="http://www.web2py.com">web2py</a>. Theme is inspired from the Modern Style WordPress theme.
 			</div>
 		</div>
+			
+
 		
     
   </body>

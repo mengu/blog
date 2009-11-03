@@ -75,3 +75,5 @@ def update():
 def delete():
 	db(db.post.id == request.vars.postid).delete()
 	redirect("/blog/")
+
+

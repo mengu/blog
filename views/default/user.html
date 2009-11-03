@@ -1,9 +1,7 @@
 {{extend 'layout.html'}}
-<div style="padding-left: 150px;">
 <h2>{{=request.args(0).replace('_',' ').capitalize()}}</h2>
 {{=form}}
 {{if request.args(0)=='login':}}
-<a href="{{=URL(r=request,args='register')}}">register</a><br />
-<a href="{{=URL(r=request,args='retrieve_password')}}">lost password</a><br />
+<a href="{{=URL(r=request,args='register')}}">Not a member?</a><br />
+<a href="{{=URL(r=request,args='retrieve_password')}}">Forgot Your Password?</a><br />
 {{pass}}
-</div>
