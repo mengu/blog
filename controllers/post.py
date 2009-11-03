@@ -72,6 +72,7 @@ def update():
 			db((db.relations.category==ecategory)&(db.relations.post==request.vars.postid)).delete()
 	redirect(URL(r=request, f="view", args=post.id))
 
+@auth.requires_membership('Admin')
 def delete():
 	db(db.post.id == request.vars.postid).delete()
 	redirect("/blog/")
