@@ -11,17 +11,20 @@ pages = db(db.page.id > 0).select()
 from gluon.contrib.markdown import WIKI
 import math
 def index():
-		limit = 3
-		page = int(request.vars.page)-1 if request.vars.page else 0
-		totalposts = db(db.post.id > 0).count()
-		totalpages = int(totalposts / limit)
-		posts = db(db.post.id > 0).select(orderby=~db.post.id)
-		for i in range(len(posts)):
-			categories = {}
-			for relation in posts[i].relations.select():
-				categories[relation.category] = relation.category.title
-				posts[i].categories = categories
-		return dict(posts=posts, pages=pages, selectedpage=1, totalpages=totalpages)
+	perpage = 5
+	totalposts = db(db.post.id > 0).count()
+	totalpages = totalposts / perpage
+	if totalpages == 1 and totalpages * perpage != totalposts:
+		totalpages = 2
+	page = int(request.vars.page) if request.vars.page else 1
+	limit = int(page - 1) * perpage
+	posts = db(db.post.id > 0).select(orderby=~db.post.id, limitby=(limit, perpage))
+	for i in range(len(posts)):
+		categories = {}
+		for relation in posts[i].relations.select():
+			categories[relation.category] = relation.category.title
+			posts[i].categories = categories
+	return dict(posts=posts, pages=pages, selectedpage=1, totalpages=totalpages, postpage=page)
 
 
 def user():
