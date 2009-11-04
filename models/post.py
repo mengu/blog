@@ -14,14 +14,14 @@ def getRecentPosts(limit):
 	posts = db(db.post.id>0).select(orderby=~db.post.dateline, limitby=(0,limit))
 	recentPosts = ""
 	for post in posts:
-		recentPosts += str(DIV(XML('<a href="'+URL(r=request, c="post", f="view", args=post.id)+'">'+post.title+'</a>')))
+		recentPosts += str(DIV(XML('<a href="'+URL(r=request, c="post", f="view", args=post.slug)+'">'+post.title+'</a>')))
 	return recentPosts
 	
 def getRecentComments(limit):
 	comments = db(db.comment.id>0).select(orderby=~db.comment.dateline, limitby=(0, limit))
 	recentComments = ""
 	for comment in comments:
-		recentComments += str(DIV(XML('By '+comment.name+' on <a href="'+URL(r=request, c="post", f="view", args=comment.post_id)+'">'+comment.post_id.title+'</a>')))
+		recentComments += str(DIV(XML('By '+comment.name+' on <a href="'+URL(r=request, c="post", f="view", args=comment.post_id.slug)+'">'+comment.post_id.title+'</a>')))
 	return recentComments
 
 def getArchives():
@@ -56,7 +56,7 @@ def is_admin():
 
 """ This method is taken from http://www.djangosnippets.org/snippets/168/. """
 def slugify(title):
-	title = re.sub('\s+', '_', title)
+	title = re.sub('\s+', '-', title)
 	title = re.sub('[^\w.-]', '', title)
 	return title.strip('_.- ').lower()
 
