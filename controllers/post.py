@@ -74,7 +74,10 @@ def update():
 
 @auth.requires_membership('Admin')
 def delete():
+	# delete the post.
 	db(db.post.id == request.args(0)).delete()
+	# delete the post from the relations.
+	db(db.relations.post == request.args(0)).delete()
 	redirect("/blog/")
 
 
