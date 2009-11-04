@@ -14,7 +14,7 @@ def index():
 	perpage = 5
 	totalposts = db(db.post.id > 0).count()
 	totalpages = totalposts / perpage
-	if totalpages == 1 and totalpages * perpage != totalposts:
+	if totalposts > perpage and totalpages == 1 and totalpages * perpage != totalposts:
 		totalpages = 2
 	page = int(request.vars.page) if request.vars.page else 1
 	limit = int(page - 1) * perpage
