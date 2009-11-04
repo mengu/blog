@@ -10,7 +10,7 @@ def index():
     return dict(posts=posts, pages=pages)
     
 def view():
-		post = db.post[request.args(0)]
+		post = db(db.post.slug == request.args(0)).select().first()
 		categories = {}
 		for relation in post.relations.select():
 			categories[relation.category] = relation.category.title
@@ -45,22 +45,24 @@ def edit():
 @auth.requires_membership('Admin')
 def create():
 	title = request.vars.title
+	slug = slugify(title)
 	body = request.vars.body
-	post = db.post.insert(title=title, body=body)
+	post = db.post.insert(title=title, slug=slug, body=body)
 	if post.id:
 		for category in request.vars.categories:
 			db.relations.insert(post=post.id, category=category)
 	redirect(URL(r=request, f="view", args=post.id))	
 
 @auth.requires_membership('Admin')
-def update():
+def update():	
 	title = request.vars.title
+	slug = slugify(title)
 	body = request.vars.body
 	post = db.post[request.vars.postid]
 	postcategories = [relation.category for relation in post.relations.select()]
-	db(db.post.id == post.id).update(title=title, body=body)
+	db(db.post.id == post.id).update(title=title, slug=slug, body=body)
 	# update categories.
-	request.vars.categories = [request.vars.categories] if type(request.vars.categories).__name__ == 'int' else request.vars.categories
+	request.vars.categories = [request.vars.categories] if type(request.vars.categories).__name__ != 'list' else request.vars.categories
 	i = 0
 	for pcategory in request.vars.categories:
 		request.vars.categories[i] = int(request.vars.categories[i])
@@ -79,5 +81,4 @@ def delete():
 	# delete the post from the relations.
 	db(db.relations.post == request.args(0)).delete()
 	redirect("/blog/")
-
 
