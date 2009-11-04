@@ -54,4 +54,10 @@ def is_admin():
 	else:
 		return False
 
+""" This method is taken from http://www.djangosnippets.org/snippets/168/. """
+def slugify(title):
+	title = re.sub('\s+', '_', title)
+	title = re.sub('[^\w.-]', '', title)
+	return title.strip('_.- ').lower()
+
 	
