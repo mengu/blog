@@ -2,7 +2,7 @@
 <div id="posts">
 
 {{ for post in posts: }}
-    <div class="post_title"><a href="{{= URL(r=request, c="post", f="view", args=post.id) }}">{{= post.title }}</a></div>
+    <div class="post_title"><a href="{{= URL(r=request, c="post", f="view", args=post.slug) }}">{{= post.title }}</a></div>
     <div class="post_info">{{= post.dateline.strftime("%B %d, %Y") }}</div>  <div class="post_info" style="margin-left: 3px;">{{ if post.comment.count() > 0: }} <a href="/blog/post/view/{{=post.id}}#comments"))}}">{{= post.comment.count() }} Comments</a> {{ else: }}{{= post.comment.count() }} Comments{{ pass }}</div>
     <div class="post_body">{{= XML(fetch_codes(post.body)) }}</div>
     <div class="post_info">Posted under {{ c = 0 }} {{ for category in post.categories: }}<a href="/blog/category/view/{{=category}}">{{= post.categories[category] }}</a>{{ c = c + 1 }}{{ if c == len(post.categories): }}.{{else:}},{{pass}} {{ pass }}</div>
@@ -14,6 +14,7 @@
 	{{ for i in range(1, totalpages+1): }}
 		<div class="page">{{ if postpage == i: }} {{=i}} {{ else: }}<a href="/blog/?page={{=i}}">{{=i}}</a>{{ pass }}</div>
 	{{ pass }}
+		<div style="clear: both;"></div>
 	</div>
 	{{ pass }}
 
