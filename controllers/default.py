@@ -11,7 +11,7 @@ pages = db(db.page.id > 0).select()
 from gluon.contrib.markdown import WIKI
 import math
 def index():
-	perpage = 5
+	perpage = 3
 	totalposts = db(db.post.id > 0).count()
 	totalpages = totalposts / perpage
 	if totalposts > perpage and totalpages == 1 and totalpages * perpage != totalposts:
